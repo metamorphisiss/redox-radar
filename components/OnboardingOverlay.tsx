@@ -162,7 +162,7 @@ export function OnboardingOverlay({ onComplete, onCancel }: { onComplete: () => 
               </div>
 
               {hasDiabetes && (
-                <div className="q-block" style={{ padding: '15px', background: 'var(--cream)', borderRadius: '8px' }}>
+                <div className="q-block" style={{ padding: '15px', background: '#F8FAFC', border: '2px solid var(--ink)', borderRadius: '0px' }}>
                   <span className="q-title">Do you have a home blood glucose monitor (glucometer)?</span>
                   <div className="q-options">
                     {["Yes", "No"].map((opt) => (
@@ -173,7 +173,7 @@ export function OnboardingOverlay({ onComplete, onCancel }: { onComplete: () => 
               )}
 
               {hasHypertension && (
-                <div className="q-block" style={{ padding: '15px', background: 'var(--cream)', borderRadius: '8px' }}>
+                <div className="q-block" style={{ padding: '15px', background: '#F8FAFC', border: '2px solid var(--ink)', borderRadius: '0px' }}>
                   <span className="q-title">Do you have a home blood pressure monitor (cuff)?</span>
                   <div className="q-options">
                     {["Yes", "No"].map((opt) => (
