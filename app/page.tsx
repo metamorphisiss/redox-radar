@@ -167,7 +167,7 @@ export default function Page() {
             </button>
           </article>
           <article className="portal-card dark-card">
-            <span className="eyebrow">FOR RESEARCHERS</span>
+            <span className="eyebrow">FOR ADMINS</span>
             <h2>The cohort, in context.</h2>
             <p>
               Explore synthetic participant data, compare groups, inspect
@@ -177,7 +177,7 @@ export default function Page() {
               className="button button-light"
               onClick={() => router.push("/office-dashboard")}
             >
-              Continue as researcher <Arrow />
+              Continue to office <Arrow />
             </button>
           </article>
         </div>

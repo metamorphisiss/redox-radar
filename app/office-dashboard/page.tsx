@@ -36,7 +36,7 @@ export default function ResearcherPortal() {
         <button className="brand plain" onClick={() => router.push("/")}>
           <span className="brand-mark">RR</span> REDOXRADAR
         </button>
-        <div className="nav-label">STUDY / RR-001</div>
+        <div className="nav-label">OFFICE / RR-001</div>
         {[
           "Overview",
           "Participants",
@@ -66,7 +66,7 @@ export default function ResearcherPortal() {
       <section className="research-main">
         <header className="research-header">
           <div>
-            <span className="eyebrow">STUDY DASHBOARD / {tab.toUpperCase()}</span>
+            <span className="eyebrow">OFFICE DASHBOARD / {tab.toUpperCase()}</span>
             <h1>
               {tab === "Overview" ? (
                 <>

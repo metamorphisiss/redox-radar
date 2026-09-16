@@ -101,7 +101,7 @@ export function OnboardingOverlay({ onComplete, onCancel }: { onComplete: () => 
               <div className="q-block">
                 <span className="q-title">Gender</span>
                 <div className="q-options">
-                  {["Male", "Female", "Non-binary", "Prefer not to say"].map((opt) => (
+                  {["Male", "Female", "Prefer not to say"].map((opt) => (
                     <button key={opt} className={`q-btn ${gender === opt ? 'selected' : ''}`} onClick={() => setGender(opt)}>{opt}</button>
                   ))}
                 </div>
