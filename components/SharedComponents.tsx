@@ -80,6 +80,7 @@ export function AssessmentFlow({ onComplete, onCancel }: { onComplete: () => voi
   const [daytimeImpact, setDaytimeImpact] = useState<number | null>(null);
   const [energy, setEnergy] = useState(5);
   // Step 4: Physio
+  const [weight, setWeight] = useState("");
   const [hr, setHr] = useState("");
   const [sys, setSys] = useState("");
   const [dia, setDia] = useState("");
@@ -240,6 +241,13 @@ export function AssessmentFlow({ onComplete, onCancel }: { onComplete: () => voi
             <>
               <h2 style={{ fontSize: '24px', letterSpacing: '-0.05em', margin: '0' }}>Physiological Signals</h2>
               
+              <div className="q-block">
+                <span className="q-title">Today&apos;s Weight (Optional)</span>
+                <div className="physio-row">
+                  <input type="number" step="0.1" min="20" max="300" placeholder="Weight in kg (e.g. 70.5)" value={weight} onChange={e => setWeight(e.target.value)} className="physio-input" style={{ width: '100%' }} />
+                </div>
+              </div>
+
               <div className="q-block">
                 <span className="q-title">Average Daily Step Count (Optional)</span>
                 <div className="physio-row">

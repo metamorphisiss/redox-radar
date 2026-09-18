@@ -9,6 +9,8 @@ export function OnboardingOverlay({ onComplete, onCancel }: { onComplete: () => 
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
   const [workType, setWorkType] = useState("");
   const [overtime, setOvertime] = useState("");
 
@@ -42,7 +44,7 @@ export function OnboardingOverlay({ onComplete, onCancel }: { onComplete: () => 
     }
   };
 
-  const isStep1Valid = name !== "" && age !== "" && gender !== "" && workType !== "" && overtime !== "";
+  const isStep1Valid = name !== "" && age !== "" && gender !== "" && height !== "" && weight !== "" && workType !== "" && overtime !== "";
   const isStep2Valid = hasSmartwatch !== null; // Just requiring smartwatch for now, rest are optional or have defaults
   const isStep3Valid = true; // Labs are optional
 
@@ -104,6 +106,20 @@ export function OnboardingOverlay({ onComplete, onCancel }: { onComplete: () => 
                   {["Male", "Female", "Prefer not to say"].map((opt) => (
                     <button key={opt} className={`q-btn ${gender === opt ? 'selected' : ''}`} onClick={() => setGender(opt)}>{opt}</button>
                   ))}
+                </div>
+              </div>
+
+              <div className="q-block">
+                <span className="q-title">Height & Weight</span>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, marginBottom: '4px', textTransform: 'uppercase' }}>Height (cm)</label>
+                    <input type="number" className="physio-input" placeholder="e.g. 175" value={height} onChange={e => setHeight(e.target.value)} style={{ width: '100%', padding: '12px' }} />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, marginBottom: '4px', textTransform: 'uppercase' }}>Weight (kg)</label>
+                    <input type="number" step="0.1" className="physio-input" placeholder="e.g. 70" value={weight} onChange={e => setWeight(e.target.value)} style={{ width: '100%', padding: '12px' }} />
+                  </div>
                 </div>
               </div>
 
