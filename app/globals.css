@@ -223,3 +223,18 @@ h1,h2,h3,p { margin:0; } h1 { font-size:clamp(56px,8vw,118px); line-height:.88; 
 .audit-ledger { background: #e5e0d8; border: var(--line) solid var(--ink); padding: 30px; margin-top: 30px; font-family: monospace; min-height: 400px; }
 .audit-header { font-size: 18px; font-weight: 900; border-bottom: 3px solid var(--ink); padding-bottom: 15px; margin-bottom: 15px; }
 .audit-row { display: grid; grid-template-columns: 200px 100px 1fr; gap: 20px; padding: 12px 0; border-bottom: 1px solid var(--gray); font-size: 14px; font-weight: 700; }
+
+/* BMI Pill */
+.bmi-pill { display: inline-flex; gap: 6px; font-size: 11px; font-weight: 900; border: 2px solid var(--ink); padding: 6px 12px; letter-spacing: 0.04em; white-space: nowrap; }
+.bmi-warning { border-color: #D97706; color: #D97706; }
+
+/* Adherence / Streak Block */
+.adherence-block { display: flex; flex-direction: column; gap: 8px; min-width: 200px; }
+.day-dots { display: flex; gap: 8px; align-items: flex-end; }
+.day-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--clay); }
+.day-dot.missed { background: transparent; border: 2px solid var(--gray); }
+
+/* Matrix label cells */
+.matrix-label { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900; letter-spacing: 0.08em; padding: 6px 4px; background: rgba(99,102,241,0.1); border: 1px solid var(--ink); }
+.matrix span { display: flex; align-items: center; justify-content: center; padding: 14px 6px; border: 1px solid var(--ink); font-weight: 900; font-size: 12px; }
+

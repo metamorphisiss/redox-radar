@@ -10,10 +10,23 @@ export default function ParticipantPortal() {
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
   const p = participants[selected];
   const [days, setDays] = useState(30);
+  const [showBand, setShowBand] = useState(true);
   const trend = useMemo(
     () => Array.from({ length: 14 }, (_, i) => 38 + i * 2 + Math.sin(i) * 8),
     [],
   );
+
+  // BMI calculation
+  const bmi = p.weightKg / Math.pow(p.heightCm / 100, 2);
+  const bmiFixed = bmi.toFixed(1);
+  const bmiCategory = bmi < 18.5 ? "Underweight" : bmi < 25 ? "Normal" : bmi < 30 ? "Overweight" : "Obese";
+  const bmiIsWarning = bmiCategory !== "Normal";
+
+  // Streak / adherence (reactive to demo day slider)
+  const currentStreak = Math.min(p.streak, days);
+  const adherence = Math.round(p.adherence - (30 - days) * 0.1);
+  const weekDots = [true, true, true, true, false, true, true]; // mock fixed pattern per week
+
   return (
     <main className="app-shell">
       {isAssessmentOpen && <AssessmentFlow onComplete={() => { setIsAssessmentOpen(false); setDays(days + 1); }} onCancel={() => setIsAssessmentOpen(false)} />}
@@ -53,6 +66,9 @@ export default function ParticipantPortal() {
           <div className="heading-meta">
             <Status value={p.status} />
             <span className="confidence">Confidence: {p.confidence}</span>
+            <span className={`bmi-pill${bmiIsWarning ? " bmi-warning" : ""}`}>
+              BMI {bmiFixed} · {bmiCategory} · {p.heightCm} cm / {p.weightKg} kg
+            </span>
           </div>
         </div>
         <div className="baseline">
@@ -65,6 +81,20 @@ export default function ParticipantPortal() {
                 ? `${days} of 7 days logged to establish your personal baseline.`
                 : "Your personal reference point is ready for comparison."}
             </span>
+          </div>
+          <div className="adherence-block">
+            <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+              <span style={{ fontSize: '13px', fontWeight: 900 }}>🔥 {currentStreak}-Day Streak</span>
+              <span style={{ fontSize: '13px', fontWeight: 900 }}>{adherence}% / 30d Adherence</span>
+            </div>
+            <div className="day-dots">
+              {['M','T','W','T','F','S','S'].map((d, i) => (
+                <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px' }}>
+                  <div className={`day-dot${!weekDots[i] ? " missed" : ""}`} />
+                  <span style={{ fontSize: '9px', fontWeight: 900 }}>{d}</span>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="demo-control">
             <label>
@@ -127,15 +157,32 @@ export default function ParticipantPortal() {
                 <span className="eyebrow">TRAJECTORY / 30 DAYS</span>
                 <h2>Vulnerability score</h2>
               </div>
-              <span className="legend">
-                <i /> daily score <i className="legend-line" /> baseline
-              </span>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px' }}>
+                <span className="legend">
+                  <i /> daily score <i className="legend-line" /> baseline
+                </span>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 800, cursor: 'pointer' }}>
+                  <input type="checkbox" checked={showBand} onChange={() => setShowBand(!showBand)} style={{ accentColor: 'var(--clay)' }} />
+                  Baseline Band
+                </label>
+              </div>
             </div>
             <svg
               className="trend-chart"
               viewBox="0 0 700 230"
               preserveAspectRatio="none"
             >
+              {showBand && (
+                <>
+                  <rect x="0" y="130" width="700" height="50"
+                    fill="rgba(99, 102, 241, 0.07)"
+                    stroke="rgba(99, 102, 241, 0.25)"
+                    strokeDasharray="4 4"
+                    strokeWidth="1"
+                  />
+                  <text x="8" y="127" fontSize="9" fontWeight="900" fill="rgba(99,102,241,0.6)" fontFamily="Arial">PERSONAL BASELINE NORM (±1 SD)</text>
+                </>
+              )}
               <line
                 x1="0"
                 x2="700"
@@ -192,7 +239,7 @@ export default function ParticipantPortal() {
           <div className="panel-heading" style={{ marginBottom: '16px' }}>
             <div>
               <span className="eyebrow">DOCUMENTS</span>
-              <h2>Lab Reports & Documents</h2>
+              <h2>Lab Reports &amp; Documents</h2>
             </div>
           </div>
           
@@ -207,7 +254,7 @@ export default function ParticipantPortal() {
               backgroundColor: 'rgba(242, 240, 232, 0.3)'
             }}
           >
-            <p style={{ margin: 0, fontWeight: 500 }}>Drag & drop your lab results (PDF, JPG) or click to browse.</p>
+            <p style={{ margin: 0, fontWeight: 500 }}>Drag &amp; drop your lab results (PDF, JPG) or click to browse.</p>
             <p style={{ margin: '8px 0 0', fontSize: '12px', color: '#666' }}>Secure upload for manual review by researchers.</p>
           </div>
 
